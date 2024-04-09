@@ -4,4 +4,5 @@ version: 1.0.0
 summary: Terraform-Enabled Environment
 description: Deploys something with Terraform
 runner: Terraform
+templatePath: main.tf
 

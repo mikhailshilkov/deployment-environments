@@ -1,0 +1,6 @@
+name: ade-pulumi
+runtime: yaml
+description: The first Pulumi program in ADE
+resources:
+  aderg:
+    type: azure-native:resources:ResourceGroup

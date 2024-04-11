@@ -34,6 +34,6 @@ echo -e "\n>>> Running Pulumi Up...\n"
 pulumi up --refresh --yes
 
 # Save outputs.
-stackout="$(pulumi stack output --json)"
+stackout=$(pulumi stack output --json | jq -r 'to_entries|.[]|{(.key): {type: "string", value: (.value)}}')
 echo "{\"outputs\": $stackout}" > $ADE_OUTPUTS
 echo "Outputs successfully generated for ADE"

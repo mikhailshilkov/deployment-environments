@@ -4,6 +4,8 @@ description: The first Pulumi program in ADE
 config:
   resource-group-name:
     type: string
+  sku:
+    type: string
 resources:
   sa:
     type: azure-native:storage:StorageAccount
@@ -11,4 +13,4 @@ resources:
       kind: Storage
       resourceGroupName: ${resource-group-name}
       sku:
-        name: Standard_LRS
+        name: ${sku}

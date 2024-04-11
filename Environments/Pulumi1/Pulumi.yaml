@@ -1,6 +1,14 @@
 name: ade-pulumi
 runtime: yaml
 description: The first Pulumi program in ADE
+config:
+  resource-group-name:
+    type: string
 resources:
-  aderg:
-    type: azure-native:resources:ResourceGroup
+  sa:
+    type: azure-native:storage:StorageAccount
+    properties:
+      kind: Storage
+      resourceGroupName: ${resource-group-name}
+      sku:
+        name: Standard_LRS

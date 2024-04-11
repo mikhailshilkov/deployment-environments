@@ -6,6 +6,7 @@ config:
     type: string
   sku:
     type: string
+    default: Standard_LRS
 resources:
   sa:
     type: azure-native:storage:StorageAccount

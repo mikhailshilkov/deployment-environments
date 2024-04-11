@@ -15,3 +15,5 @@ resources:
       resourceGroupName: ${resource-group-name}
       sku:
         name: ${sku}
+outputs:
+  sa-name: ${sa.name}

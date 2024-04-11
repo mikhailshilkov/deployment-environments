@@ -17,3 +17,7 @@ resource "azurerm_resource_group" "rg" {
   name     = "myTFResourceGroup"
   location = "westus2"
 }
+
+output "rgname" {
+  value = azurerm_resource_group.rg.name
+}

@@ -4,3 +4,4 @@ version: 1.0.0
 summary: Terraform-Enabled Environment (custom image)
 description: Deploys something with Terraform (custom image)
 runner: registrycfca84b8.azurecr.io/ade-terraform:v1.0.0
+templatePath: main.tf

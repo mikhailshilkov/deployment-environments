@@ -1,11 +1,13 @@
 {
     "name": "PulumiTypeScript",
     "main": "index.ts",
+    "type": "module",
     "devDependencies": {
-        "@types/node": "^18"
+        "@types/node": "^18",
+        "tsx": "^4.7.2"
     },
     "dependencies": {
-        "@pulumi/pulumi": "^3.0.0",
-        "@pulumi/azure-native": "^2.0.0"
+        "@pulumi/azure-native": "^2.0.0",
+        "@pulumi/pulumi": "^3.0.0"
     }
 }

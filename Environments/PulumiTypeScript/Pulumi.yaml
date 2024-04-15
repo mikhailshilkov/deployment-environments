@@ -1,5 +1,9 @@
 name: ade-pulumi-nodejs
-runtime: nodejs
+runtime: 
+  name: nodejs
+  options:
+    nodeargs: '--import tsx/esm'
+    typescript: false
 description: A TypeScript Pulumi program in ADE
 config:
   resource-group-name:

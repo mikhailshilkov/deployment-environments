@@ -18,6 +18,17 @@ RUN curl -fsSL https://get.pulumi.com | sh
 ENV PATH="${PATH}:/root/.pulumi/bin"
 RUN pulumi plugin install resource azure-native
 
+# install dotnet
+RUN wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
+RUN chmod +x ./dotnet-install.sh
+RUN ./dotnet-install.sh --version latest
+ENV DOTNET_ROOT="/root/.dotnet"
+ENV PATH="${PATH}:/root/.dotnet:/root/.dotnet/tools"
+
+# install node.js
+RUN apk add nodejs npm
+RUN npm install typescript -g
+
 # Grab all .sh files from scripts, copy to
 # root scripts, replace line-endings and make them all executable
 COPY scripts/* /scripts/

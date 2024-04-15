@@ -19,7 +19,7 @@ export PULUMI_CONFIG_PASSPHRASE=
 pulumi login file://$ADE_STORAGE
 
 echo -e "\n>>> Selecting Pulumi Stack...\n"
-pulumi stack select dev
+pulumi stack select $ADE_ENVIRONMENT_NAME
 
 echo -e "\n>>> Setting Pulumi Configuration...\n"
 pulumi config set azure-native:location $ADE_ENVIRONMENT_LOCATION

@@ -35,11 +35,7 @@ echo "$ADE_OPERATION_PARAMETERS" | jq -r 'to_entries|.[]|[.key, .value] | @tsv' 
 
 echo -e "\n>>> Restore dependencies...\n"
 if [ -f "package.json" ]; then
-   npm --logevel=error install
-   echo -e "\n>>> tsc...\n"
-   export NODE_OPTIONS=--max-old-space-size=2048
-   tsc --version
-   tsc --diagnostics
+   npm install --logevel error
 fi
 
 echo -e "\n>>> Running Pulumi Up...\n"

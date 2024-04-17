@@ -5,32 +5,31 @@
 
 set -e # exit on error
 
-# Set up Pulumi Azure Native managed identity.
-export ARM_USE_MSI=true
-export ARM_CLIENT_ID=$ADE_CLIENT_ID
-export ARM_TENANT_ID=$ADE_TENANT_ID
-export ARM_SUBSCRIPTION_ID=$ADE_SUBSCRIPTION_ID
+DIR=$(dirname "$0")
+source  $DIR/_common.sh
 
-echo -e "\n>>> Pulumi/.NET/Node Versions...\n"
+echo -e "\n>>> Pulumi/.NET/Node/Python Versions...\n"
 pulumi version
 dotnet --version
 node --version
-python --version || true
+python --version
 
-echo -e "\n>>> Pulumi Local Login...\n"
-mkdir -p $ADE_STORAGE
-export PULUMI_CONFIG_PASSPHRASE=
-pulumi login file://$ADE_STORAGE
+# Login to Pulumi (Cloud or Local)
+pulumiLogin
 
 echo -e "\n>>> Initializing Pulumi Stack...\n"
 pulumi stack select $ADE_ENVIRONMENT_NAME --create
 
+export PULUMI_CONFIG_FILE=$ADE_STORAGE/Pulumi.$ADE_ENVIRONMENT_NAME.yaml
+
 echo -e "\n>>> Setting Pulumi Configuration...\n"
-pulumi config set azure-native:location $ADE_ENVIRONMENT_LOCATION
-pulumi config set resource-group-name $ADE_RESOURCE_GROUP_NAME
+pulumi config set azure-native:location $ADE_ENVIRONMENT_LOCATION --config-file $PULUMI_CONFIG_FILE
+pulumi config set resource-group-name $ADE_RESOURCE_GROUP_NAME --config-file $PULUMI_CONFIG_FILE
 echo "$ADE_OPERATION_PARAMETERS" | jq -r 'to_entries|.[]|[.key, .value] | @tsv' |
   while IFS=$'\t' read -r key value; do
-    pulumi config set $key $value
+    if [ "$key" != "pulumiAccessToken" ] && [ "$key" != "pulumiAccessTokenSecret" ]; then
+      pulumi config set $key $value --config-file $PULUMI_CONFIG_FILE
+    fi
   done
 
 echo -e "\n>>> Restore dependencies...\n"
@@ -39,7 +38,7 @@ if [ -f "package.json" ]; then
 fi
 
 echo -e "\n>>> Running Pulumi Up...\n"
-pulumi up --refresh --yes
+pulumi up --refresh --yes --config-file $PULUMI_CONFIG_FILE
 
 # Save outputs.
 stackout=$(pulumi stack output --json | jq -r 'to_entries|.[]|{(.key): {type: "string", value: (.value)}}')

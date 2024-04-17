@@ -12,3 +12,5 @@ const storageAccount = new storage.StorageAccount("sa", {
     },
     kind: storage.Kind.StorageV2,
 });
+
+export const saname = storageAccount.name;

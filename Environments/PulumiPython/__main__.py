@@ -15,3 +15,5 @@ account = storage.StorageAccount(
     ),
     kind=storage.Kind.STORAGE_V2,
 )
+
+pulumi.export("saname", account.name)

@@ -10,3 +10,5 @@ const storageAccount = new storage.Account("sa", {
     accountReplicationType: "LRS",
     accountKind: "StorageV2",
 });
+
+export const saname = storageAccount.name;

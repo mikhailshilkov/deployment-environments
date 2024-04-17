@@ -17,7 +17,7 @@ return await Pulumi.Deployment.RunAsync(() =>
         },
         Kind = Kind.StorageV2
     });
-    return new Dictionary<string, object?>(
+    return new Dictionary<string, object?>{
         ["saname"] = storageAccount.Name
-    );
+    };
 });

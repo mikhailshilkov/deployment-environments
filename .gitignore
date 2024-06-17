@@ -140,3 +140,7 @@ local.settings.json
 local.parameters.json
 
 schemas
+
+**/bin
+**/obj
+**/.vscode

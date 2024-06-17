@@ -1,12 +1,9 @@
 ﻿using Pulumi;
-using Pulumi.AzureNative.OperationalInsights;
-using Pulumi.AzureNative.OperationalInsights.Inputs;
-using Pulumi.AzureNative.Resources;
 using Pulumi.AzureNative.App;
 using Pulumi.AzureNative.App.Inputs;
 using System.Collections.Generic;
 
-return await Pulumi.Deployment.RunAsync(() =>
+return await Deployment.RunAsync(() =>
 {
     var config = new Config();
     

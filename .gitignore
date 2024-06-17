@@ -144,3 +144,4 @@ schemas
 **/bin
 **/obj
 **/.vscode
+**/Pulumi.*.yaml

@@ -1,4 +1,0 @@
-config:
-  PulumiWorkshopLive:image: yeasy/simple-web
-  PulumiWorkshopLive:resource-group-name: mikhail-workshop
-  azure-native:location: WestEurope
